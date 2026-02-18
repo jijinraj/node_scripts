@@ -264,7 +264,8 @@ PostDown = iptables -t nat -D POSTROUTING -o \$DEFAULT_IFACE -j MASQUERADE; ipta
 EOF
 fi
 
-cat > \"\$BASE/agent/app.py\" <<'PY'
+# Agent app (FastAPI)
+cat > "${BASE}/agent/app.py" <<'PY'
 import os, subprocess, tempfile
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
@@ -301,7 +302,7 @@ class AddPeerReq(BaseModel):
 def health():
     try:
         out = wg_exec(["show", WG_IFACE])
-        return {"ok": True, "wg_show": out[:2000]}
+        return {"ok": True, "iface": WG_IFACE, "wg_show": out[:2000]}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
