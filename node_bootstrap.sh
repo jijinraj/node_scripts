@@ -3,7 +3,7 @@
 # - Node specifics come from env vars (injected by Stage-0)
 # - Safe: continues on failure per step
 # - Supports ADMIN_PUBKEY_FILE to avoid quoting hell in stage-0
-
+echo "Andi!"
 set -u
 set -o pipefail
 
